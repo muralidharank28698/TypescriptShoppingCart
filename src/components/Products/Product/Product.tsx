@@ -3,6 +3,7 @@ import { Button, Stack } from "@mui/material";
 import { ProductInterface } from "../../../Store/product/models/Product";
 
 import "./Product.css";
+import { Link } from "react-router-dom";
 
 interface productProps {
   products: ProductInterface;
@@ -30,9 +31,11 @@ const Product = (props: productProps) => {
           <span>Memory Storage:</span> {products.Memory}
         </p>
         <Stack spacing={2} direction="row" className="Btns">
-          <Button color="secondary" size="small" variant="contained">
-            view Item
-          </Button>
+          <Link to={`/SingleItem`}>
+            <Button color="secondary" size="small" variant="contained">
+              view Item
+            </Button>
+          </Link>
           <Button color="success" size="small" variant="contained">
             Add To Cart
           </Button>

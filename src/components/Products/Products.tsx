@@ -39,7 +39,7 @@ const Products = (props: AppProps) => {
 // });
 
 const mapStateToProps = (state: AppState) => {
-  console.log(state);
+  // console.log(state);
   return {
     products: state.ProductReducer.products,
   };
