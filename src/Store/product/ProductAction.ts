@@ -30,7 +30,10 @@ export const removeFromCart = (item: number) => ({
   },
 });
 
-export const adjustQty = (item: ProductInterface) => ({
+export const adjustQty = (id: number, value: number) => ({
   type: ADJUST_QTY,
-  // payload: item,
+  payload: {
+    id: id,
+    qty: value,
+  },
 });

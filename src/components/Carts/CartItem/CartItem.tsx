@@ -3,12 +3,16 @@ import "./CartItem.css";
 import { Button, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 import { ProductInterface } from "../../../Store/product/models/Product";
-import { removeFromCart } from "../../../Store/product/ProductAction";
+import {
+  removeFromCart,
+  adjustQty,
+} from "../../../Store/product/ProductAction";
 import { connect } from "react-redux";
 
 interface productProps {
   product: ProductInterface;
   removeFromCart: any;
+  adjustQty: any;
 }
 // interface AppProps {
 //   productitem: () => void;
@@ -18,20 +22,20 @@ interface productProps {
 type PropType = productProps;
 
 const CartItem = (props: productProps) => {
-  const { product, removeFromCart } = props;
+  const { product, removeFromCart, adjustQty } = props;
 
   // const { cart } = props;
   // console.log(product.title);
 
   // console.log(itemData);
   // console.log(itemdata.title);
-  // const [input, setInput] = useState(itemData.qty);
+  const [input, setInput] = useState(product.qty);
 
-  // const onChangeHandler = (e) => {
-  //   // console.log(e.target.value);
-  //   setInput(e.target.value);
-  //   adjustQty(itemData.id, e.target.value);
-  // };
+  const onChangeHandler = (e: any) => {
+    // console.log(e.target.value);
+    setInput(e.target.value);
+    adjustQty(product.id, e.target.value);
+  };
 
   return (
     <div className="productSingleContainer">
@@ -55,8 +59,8 @@ const CartItem = (props: productProps) => {
         <input
           type="number"
           name="qty"
-          // value={input}
-          // onChange={onChangeHandler}
+          value={input}
+          onChange={onChangeHandler}
         />
         <Stack spacing={2} direction="row" className="Btns">
           <Button
@@ -76,7 +80,7 @@ const CartItem = (props: productProps) => {
 const mapDispatchToProps = (dispatch: any) => {
   return {
     removeFromCart: (id: number) => dispatch(removeFromCart(id)),
-    // adjustQty: (id, value) => dispatch(adjustQty(id, value)),
+    adjustQty: (id: number, value: number) => dispatch(adjustQty(id, value)),
   };
 };
 

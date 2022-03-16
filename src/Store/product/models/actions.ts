@@ -31,7 +31,10 @@ interface removeFromCart {
 
 interface adjustQty {
   type: typeof ADJUST_QTY;
-  payload: ProductInterface;
+  payload: {
+    id: number;
+    qty: number;
+  };
 }
 
 export type ProductActionTypes =

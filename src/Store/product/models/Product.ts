@@ -6,6 +6,7 @@ export interface ProductInterface {
   image: string;
   Memory: string;
   qty?: number;
+  value?: number;
 }
 
 export interface ProductReducerInterface {

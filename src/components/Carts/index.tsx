@@ -48,7 +48,7 @@ const Cart = (props: AppProps) => {
       ))} */}
         {/* <CartItem /> */}
       </div>
-      <div className="CartSummary">
+      {/* <div className="CartSummary">
         <div className="CartSummary-content">
           <h4>cart summary</h4>
           <br />
@@ -62,7 +62,7 @@ const Cart = (props: AppProps) => {
             Proceed to Buy
           </Button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

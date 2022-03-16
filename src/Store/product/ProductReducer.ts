@@ -122,7 +122,7 @@ export const ProductReducer: Reducer<ProductReducerInterface, Action> = (
         ...state,
         cart: state.cart.map((item) =>
           item.id === action.payload.id
-            ? { ...item, qty: +action.payload }
+            ? { ...item, qty: +action.payload.qty }
             : item
         ),
       };
