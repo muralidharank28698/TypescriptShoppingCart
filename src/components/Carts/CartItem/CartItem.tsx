@@ -2,10 +2,26 @@ import React, { useState } from "react";
 // import "./CartItem.css";
 import { Button, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
+import { ProductInterface } from "../../../Store/product/models/Product";
 
 import { connect } from "react-redux";
 
-function CartItem() {
+interface productProps {
+  product: ProductInterface;
+}
+// interface AppProps {
+//   productitem: () => void;
+//   addtocart: () => void;
+//   cart: ProductInterface[];
+// }
+type PropType = productProps;
+
+const CartItem = (props: productProps) => {
+  const { product } = props;
+
+  // const { cart } = props;
+  // console.log(product.title);
+
   // console.log(itemData);
   // console.log(itemdata.title);
   // const [input, setInput] = useState(itemData.qty);
@@ -19,21 +35,21 @@ function CartItem() {
   return (
     <div className="productSingleContainer">
       <div className="productSingleContainerImage">
-        <img src={require("../../../assets/vivo.png")} alt="image" />
+        <img src={product.image} alt={product.title} />
       </div>
       <hr />
       <div className="productSingleContainerContents">
         <h2>
-          <span>Model Name:</span> vivo
+          <span>Model Name:</span> {product.title}
         </h2>
         <p>
-          <span>Description:</span> sadfvb
+          <span>Description:</span> {product.des}
         </p>
         <p>
-          <span>M.R.P.:</span> 8888
+          <span>M.R.P.:</span> {product.price}
         </p>
         <p>
-          <span>Memory Storage:</span> 12000
+          <span>Memory Storage:</span> {product.Memory}
         </p>
         <Stack spacing={2} direction="row" className="Btns">
           <Link to={`/`}>
@@ -45,7 +61,7 @@ function CartItem() {
       </div>
     </div>
   );
-}
+};
 
 // const mapDispatchToProps = (dispatch) => {
 //   return {

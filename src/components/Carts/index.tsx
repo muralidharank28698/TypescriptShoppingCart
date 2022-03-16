@@ -5,8 +5,19 @@ import { Button } from "@mui/material";
 import "./CartSummary.css";
 import { AppState } from "../../Store/rootStore";
 import { connect } from "react-redux";
+import { ProductInterface } from "../../Store/product/models/Product";
 
-const Cart = ({ cart }: { cart: any }) => {
+interface AppProps {
+  productitem: () => void;
+  addtocart: () => void;
+  products: ProductInterface[];
+  cart: ProductInterface[];
+}
+
+const Cart = (props: AppProps) => {
+  const { cart } = props;
+  console.log(cart);
+
   // console.log(cart);
   // console.log(typeof cart);
   // console.log(cart.title);
@@ -29,13 +40,13 @@ const Cart = ({ cart }: { cart: any }) => {
   return (
     <div>
       <div>
-        {/* {cart.map((cart) => {
-          return <CartItem key={cart.id} itemData={cart} />;
-        })} */}
+        {cart.map((prop) => {
+          return <CartItem key={prop.id} product={prop} />;
+        })}
         {/* {cart.map((item) => (
         <CartItem key={item.id} itemData={item} />
       ))} */}
-        <CartItem />
+        {/* <CartItem /> */}
       </div>
       <div className="CartSummary">
         <div className="CartSummary-content">
