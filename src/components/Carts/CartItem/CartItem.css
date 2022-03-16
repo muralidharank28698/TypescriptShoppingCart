@@ -21,3 +21,11 @@
     flex-direction: column;
   }
 } */
+
+.productSingleContainerContents input {
+  margin-top: 10px;
+  width: 80px;
+  height: 24px;
+  border-radius: 10px;
+  text-align: center;
+}

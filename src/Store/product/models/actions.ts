@@ -4,6 +4,8 @@ import { ProductInterface } from "../../product/models/Product";
 export const PRODUCT_ITEM = "PRODUCT_ITEM";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const LOAD_CURRENT_ITEM = "LOAD_CURRENT_ITEM";
+export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+export const ADJUST_QTY = "ADJUST_QTY";
 
 // action types
 
@@ -22,4 +24,19 @@ interface loadCurrentItem {
   payload: ProductInterface;
 }
 
-export type ProductActionTypes = productItem | addToCart | loadCurrentItem;
+interface removeFromCart {
+  type: typeof REMOVE_FROM_CART;
+  payload: ProductInterface;
+}
+
+interface adjustQty {
+  type: typeof ADJUST_QTY;
+  payload: ProductInterface;
+}
+
+export type ProductActionTypes =
+  | productItem
+  | addToCart
+  | loadCurrentItem
+  | removeFromCart
+  | adjustQty;

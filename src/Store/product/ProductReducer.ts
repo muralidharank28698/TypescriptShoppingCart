@@ -4,6 +4,8 @@ import {
   PRODUCT_ITEM,
   ADD_TO_CART,
   LOAD_CURRENT_ITEM,
+  REMOVE_FROM_CART,
+  ADJUST_QTY,
 } from "./models/actions";
 
 import { ProductInterface, ProductReducerInterface } from "./models/Product";
@@ -48,7 +50,7 @@ const initialState: ProductReducerInterface = {
     },
   ],
   cart: [],
-  // currentItem: null,
+  // currentItem: undefined,
 };
 
 export const ProductReducer: Reducer<ProductReducerInterface, Action> = (
@@ -105,6 +107,26 @@ export const ProductReducer: Reducer<ProductReducerInterface, Action> = (
         ...state,
         currentItem: action.payload,
       };
+
+    case REMOVE_FROM_CART:
+      // console.log(action.payload);
+
+      return {
+        ...state,
+        // currentItem: action.payload,
+        cart: state.cart.filter((item) => item.id !== action.payload.id),
+      };
+
+    case ADJUST_QTY:
+      return {
+        ...state,
+        cart: state.cart.map((item) =>
+          item.id === action.payload.id
+            ? { ...item, qty: +action.payload }
+            : item
+        ),
+      };
+
     default:
       return state;
   }
