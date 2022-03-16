@@ -5,8 +5,11 @@ export interface ProductInterface {
   price: string;
   image: string;
   Memory: string;
+  qty?: number;
 }
 
 export interface ProductReducerInterface {
   products: ProductInterface[];
+  cart: ProductInterface[];
+  currentItem?: ProductInterface;
 }

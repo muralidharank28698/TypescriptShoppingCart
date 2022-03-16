@@ -3,8 +3,10 @@ import CartItem from "./CartItem/CartItem";
 // import { connect } from "react-redux";
 import { Button } from "@mui/material";
 import "./CartSummary.css";
+import { AppState } from "../../Store/rootStore";
+import { connect } from "react-redux";
 
-const Cart = () => {
+const Cart = ({ cart }: { cart: any }) => {
   // console.log(cart);
   // console.log(typeof cart);
   // console.log(cart.title);
@@ -54,6 +56,13 @@ const Cart = () => {
   );
 };
 
+const mapStateToProps = (state: AppState) => {
+  // console.log(state);
+  return {
+    cart: state.ProductReducer.cart,
+  };
+};
+
 // const mapStateToProps = (state) => {
 //   // console.log(state);
 //   return {
@@ -61,6 +70,6 @@ const Cart = () => {
 //   };
 // };
 
-// export default connect(mapStateToProps)(Cart);
-//
-export default Cart;
+export default connect(mapStateToProps)(Cart);
+
+// export default Cart;

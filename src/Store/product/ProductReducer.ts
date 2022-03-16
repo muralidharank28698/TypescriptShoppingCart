@@ -3,6 +3,7 @@ import {
   ProductActionTypes,
   PRODUCT_ITEM,
   ADD_TO_CART,
+  LOAD_CURRENT_ITEM,
 } from "./models/actions";
 
 import { ProductInterface, ProductReducerInterface } from "./models/Product";
@@ -46,6 +47,8 @@ const initialState: ProductReducerInterface = {
       Memory: "800 GB",
     },
   ],
+  cart: [],
+  // currentItem: null,
 };
 
 export const ProductReducer: Reducer<ProductReducerInterface, Action> = (
@@ -55,6 +58,8 @@ export const ProductReducer: Reducer<ProductReducerInterface, Action> = (
   //   const nextState = {
   //     id: state.id,
   //   };
+  // console.log(state, action);
+
   switch (action.type) {
     case PRODUCT_ITEM:
       //   nextState.id = state.id + 1;
@@ -62,8 +67,43 @@ export const ProductReducer: Reducer<ProductReducerInterface, Action> = (
         ...state,
       };
     case ADD_TO_CART:
+      const item = state.products.find((prod) => prod.id === action.payload);
+      // console.log(action.payload);
+
+      if (item === undefined) {
+        return state;
+      } else {
+        const inCart = state.cart.find((item) =>
+          item.id === action.payload ? true : false
+        );
+        // console.log(item);
+
+        // const inCart = state.cart.find((item) =>
+        //   item.id === action.payload.id ? true : false
+        // );
+        return {
+          ...state,
+          cart: inCart
+            ? state.cart.map((item) =>
+                item.id === action.payload
+                  ? { ...item, qty: item?.qty! + 1 }
+                  : item
+              )
+            : [
+                ...state.cart,
+                {
+                  ...item,
+                  qty: 1,
+                },
+              ],
+        };
+      }
+
+    case LOAD_CURRENT_ITEM:
+      // console.log(action.payload);
       return {
         ...state,
+        currentItem: action.payload,
       };
     default:
       return state;

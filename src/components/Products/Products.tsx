@@ -20,7 +20,7 @@ const Products = (props: AppProps) => {
   return (
     <div>
       {products.map((prop) => {
-        return <Product key={prop.id} products={prop} />;
+        return <Product key={prop.id} product={prop} />;
       })}
       {/* <Product products={products[0]} /> */}
     </div>
@@ -47,7 +47,7 @@ const mapStateToProps = (state: AppState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   productitem: () => dispatch(productItem()),
-  addtocart: () => dispatch(addToCart()),
+  // addtocart: () => dispatch(addToCart()),
 });
 
 // export default Products;

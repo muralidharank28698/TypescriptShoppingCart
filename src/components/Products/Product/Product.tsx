@@ -1,42 +1,65 @@
 import React from "react";
 import { Button, Stack } from "@mui/material";
 import { ProductInterface } from "../../../Store/product/models/Product";
+import {
+  loadCurrentItem,
+  addToCart,
+} from "../../../Store/product/ProductAction";
 
 import "./Product.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { connect } from "react-redux";
 
 interface productProps {
-  products: ProductInterface;
+  product: ProductInterface;
 }
 
-const Product = (props: productProps) => {
-  const { products } = props;
+type PropType = productProps & MapDispatchToPropsType;
+
+const Product = (props: PropType) => {
+  const { product, loadCurrentItem, addToCart } = props;
+  // console.log(props);
+
+  const history = useHistory();
   return (
     <div className="productSingleContainer">
       <div className="productSingleContainerImage">
-        <img src={products.image} alt={products.title}></img>
+        <img src={product.image} alt={product.title}></img>
       </div>
       <hr />
       <div className="productSingleContainerContents">
         <h2>
-          <span>Model Name:</span> {products.title}
+          <span>Model Name:</span> {product.title}
         </h2>
         <p>
-          <span>Description:</span> {products.des}
+          <span>Description:</span> {product.des}
         </p>
         <p>
-          <span>M.R.P.:</span> {products.price}
+          <span>M.R.P.:</span> {product.price}
         </p>
         <p>
-          <span>Memory Storage:</span> {products.Memory}
+          <span>Memory Storage:</span> {product.Memory}
         </p>
         <Stack spacing={2} direction="row" className="Btns">
-          <Link to={`/SingleItem`}>
-            <Button color="secondary" size="small" variant="contained">
-              view Item
-            </Button>
-          </Link>
-          <Button color="success" size="small" variant="contained">
+          {/* <Link to={`/SingleItem`}> */}
+          <Button
+            color="secondary"
+            size="small"
+            variant="contained"
+            onClick={() => {
+              loadCurrentItem(product);
+              history.push("/SingleItem");
+            }}
+          >
+            view Item
+          </Button>
+          {/* </Link> */}
+          <Button
+            color="success"
+            size="small"
+            variant="contained"
+            onClick={() => addToCart(product.id)}
+          >
             Add To Cart
           </Button>
         </Stack>
@@ -45,4 +68,16 @@ const Product = (props: productProps) => {
   );
 };
 
-export default Product;
+const mapDispatchToProps = (dispatch: any) => {
+  // console.log(state);
+  return {
+    addToCart: (id: number) => dispatch(addToCart(id)),
+    loadCurrentItem: (item: ProductInterface) =>
+      dispatch(loadCurrentItem(item)),
+  };
+};
+
+type MapDispatchToPropsType = ReturnType<typeof mapDispatchToProps>;
+
+export default connect(null, mapDispatchToProps)(Product);
+// export default Product;
