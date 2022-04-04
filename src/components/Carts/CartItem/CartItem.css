@@ -23,9 +23,19 @@
 } */
 
 .productSingleContainerContents input {
-  margin-top: 10px;
+  margin-top: 3px;
   width: 80px;
   height: 24px;
   border-radius: 10px;
   text-align: center;
+}
+/* .productSingleContainer {
+  height: max-content !important;
+} */
+.rating {
+  display: flex;
+  margin-top: 8px;
+}
+.rating input {
+  margin-left: 18px;
 }

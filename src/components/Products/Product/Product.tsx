@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Stack } from "@mui/material";
+import { Button, Rating, Stack } from "@mui/material";
 import { ProductInterface } from "../../../Store/product/models/Product";
 import {
   loadCurrentItem,
@@ -40,8 +40,10 @@ const Product = (props: PropType) => {
         <p>
           <span>Memory Storage:</span> {product.Memory}
         </p>
+        <Stack spacing={2} marginTop="10px" className="stack">
+          <Rating precision={0.5} size="medium" color="secondary" value={4} />
+        </Stack>
         <Stack spacing={2} direction="row" className="Btns">
-          {/* <Link to={`/SingleItem`}> */}
           <Button
             color="secondary"
             size="small"
@@ -53,7 +55,6 @@ const Product = (props: PropType) => {
           >
             view Item
           </Button>
-          {/* </Link> */}
           <Button
             color="success"
             size="small"

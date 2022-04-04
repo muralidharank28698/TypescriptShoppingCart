@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
+import { connect, MapDispatchToProps } from "react-redux";
 import { Button } from "@mui/material";
 import "./SingleItem.css";
 // import vivo from "../../assets/vivo.png";
@@ -15,10 +15,10 @@ interface AppProps {
   products: ProductInterface[];
 }
 
-type propsType = AppProps & mapStateToPropsType;
+type propsType = AppProps & mapStateToPropsType & mapDispatchToPropsType;
 const SingleItem = (props: propsType) => {
   // console.log(props);
-  const { currentItem } = props;
+  const { currentItem, addToCart } = props;
   // console.log(currentItem);
   const history = useHistory();
 
@@ -62,7 +62,11 @@ const SingleItem = (props: propsType) => {
             <tr>
               <th></th>
               <td style={{ float: "right" }}>
-                <Button color="secondary" variant="contained">
+                <Button
+                  color="secondary"
+                  variant="contained"
+                  onClick={() => addToCart(currentItem.id)}
+                >
                   Add To Cart
                 </Button>
               </td>
@@ -99,12 +103,13 @@ type mapStateToPropsType = ReturnType<typeof mapStateToProps>;
 //   };
 // };
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     addToCart: (id) => dispatch(addToCart(id)),
-//   };
-// };
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    addToCart: (id: number) => dispatch(addToCart(id)),
+  };
+};
+type mapDispatchToPropsType = ReturnType<typeof mapDispatchToProps>;
 
-export default connect(mapStateToProps)(SingleItem);
+export default connect(mapStateToProps, mapDispatchToProps)(SingleItem);
 // export default SingleItem;
 //

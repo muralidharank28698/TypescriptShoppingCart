@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./CartItem.css";
-import { Button, Stack } from "@mui/material";
+import { Button, Stack, Rating } from "@mui/material";
 import { Link } from "react-router-dom";
 import { ProductInterface } from "../../../Store/product/models/Product";
 import {
@@ -56,12 +56,17 @@ const CartItem = (props: productProps) => {
         <p>
           <span>Memory Storage:</span> {product.Memory}
         </p>
-        <input
-          type="number"
-          name="qty"
-          value={input}
-          onChange={onChangeHandler}
-        />
+        <div className="rating">
+          <Stack spacing={2} marginTop="10px">
+            <Rating precision={0.5} size="small" color="secondary" value={4} />
+          </Stack>
+          <input
+            type="number"
+            name="qty"
+            value={input}
+            onChange={onChangeHandler}
+          />
+        </div>
         <Stack spacing={2} direction="row" className="Btns">
           <Button
             color="warning"
